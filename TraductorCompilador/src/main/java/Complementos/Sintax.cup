@@ -1,0 +1,173 @@
+package Complementos;
+
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+      this.s=s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+ 
+
+
+:};
+
+terminal Sustantivo,
+        ERROR,
+        Verbo,
+        Adverbio_Cantidad,
+        Adverbio_Modo,
+        Conjucion_Subordinante,
+        Interjeccion,
+        Adverbio_Lugar,
+        Numeral_Cardinal,
+        Adverbio_Duda,
+        Conjucion_Cordinantes,
+        Adverbio_Tiempo,
+        Numero,
+        Adjetivo_Calificativo,
+        Adjetivo_Demostrativo,
+        Adjetivo_Indefinido,
+        Numeral_Ordinal,
+        Pronombre_Personal,
+        Pronombre_Interrogativo,
+        Articulo_Definido,
+        Adverbio_Afirmacion,
+        Adverbio_Negacion,
+        Preposicion,
+        Contraccion,
+        Signo_Puntuacion,
+        Articulo_Indefinido,
+        Verbo_Singular,
+        Verbo_Plural,
+        Adjetivo_Posesivo;
+         
+
+
+
+non terminal ENTRADA, 
+             Oracion_Afirmativa,
+             Oracion_Interrogativa,
+             Oracion_Negativa,
+             Palabra,
+             Parrafo
+;
+
+start with ENTRADA;
+
+ENTRADA ::= Oracion_Afirmativa
+            |Oracion_Interrogativa
+            |Palabra
+            |Oracion_Negativa
+            |Parrafo
+
+;
+
+
+
+Oracion_Afirmativa ::= Articulo_Definido  Sustantivo  Verbo
+                      
+                      |Articulo_Definido Sustantivo
+
+                      |Articulo_Definido Sustantivo Verbo_Singular Adjetivo_Calificativo
+
+                      |Pronombre_Personal Verbo Adverbio_Tiempo
+
+                      |Pronombre_Personal Verbo
+
+                      |Pronombre_Personal Verbo Articulo_Definido Sustantivo
+
+                      |Contraccion Articulo_Indefinido Sustantivo
+
+                      |Contraccion Adverbio_Lugar Pronombre_Personal
+
+                      |Contraccion Adjetivo_Posesivo Adjetivo_Calificativo
+
+                      |Articulo_Definido Sustantivo Verbo_Singular Adverbio_Cantidad Adjetivo_Calificativo
+                      
+                      |Contraccion Adverbio_Modo Adverbio_Negacion Preposicion Adverbio_Lugar
+                  
+                      |Adverbio_Afirmacion Contraccion Articulo_Indefinido Sustantivo
+                      
+                      |Contraccion Adverbio_Afirmacion Articulo_Indefinido Sustantivo
+
+                      |Adverbio_Afirmacion Articulo_Definido Sustantivo Verbo_Singular Adjetivo_Calificativo
+;
+
+Oracion_Interrogativa ::= Signo_Puntuacion Pronombre_Interrogativo Verbo Articulo_Indefinido Sustantivo Signo_Puntuacion
+
+                          |Signo_Puntuacion Pronombre_Interrogativo Verbo_Singular Adjetivo_Posesivo Sustantivo Signo_Puntuacion
+                          
+                          |Signo_Puntuacion Verbo_Plural Pronombre_Personal Adverbio_Lugar Signo_Puntuacion
+                          
+                          |Signo_Puntuacion Verbo_Plural Adjetivo_Calificativo Signo_Puntuacion
+;
+
+Oracion_Negativa ::= Pronombre_Personal Contraccion Sustantivo
+ 
+                    |Contraccion Verbo
+
+                    |Articulo_Definido Sustantivo Contraccion Adjetivo_Calificativo
+
+                    |Contraccion Adverbio_Negacion Adjetivo_Calificativo
+                    
+                    |Contraccion Adverbio_Negacion Articulo_Indefinido Sustantivo
+                    
+                    |Pronombre_Personal Contraccion Adjetivo_Calificativo Sustantivo
+                    
+                    |Adverbio_Negacion Adjetivo_Indefinido
+                    
+                                   
+                   
+;
+
+
+
+Palabra ::= Sustantivo
+        |Adverbio_Duda
+        |Conjucion_Cordinantes
+        |Adverbio_Tiempo
+        |Adjetivo_Calificativo
+        |Adjetivo_Demostrativo
+        |Adjetivo_Indefinido
+        |Numeral_Ordinal
+        |Pronombre_Personal
+        |Verbo
+        |Adverbio_Cantidad
+        |Adverbio_Modo
+        |Conjucion_Subordinante
+        |Interjeccion
+        |Adverbio_Lugar
+        |Numeral_Cardinal
+        |Pronombre_Interrogativo
+        |Articulo_Definido
+        |Adverbio_Afirmacion
+        |Adverbio_Negacion
+        |Preposicion
+        |Contraccion
+        |Signo_Puntuacion
+        |Articulo_Indefinido
+        |Adjetivo_Posesivo
+;
+Parrafo ::= Oracion_Afirmativa Conjucion_Cordinantes Verbo_Singular Preposicion Articulo_Definido Sustantivo Oracion_Negativa
+
+           |Oracion_Afirmativa Conjucion_Cordinantes Oracion_Afirmativa Signo_Puntuacion
+
+           |Oracion_Negativa Conjucion_Cordinantes Oracion_Afirmativa
+
+           |Contraccion Adverbio_Negacion Articulo_Indefinido Sustantivo Oracion_Negativa 
+           
+;
+
+
+
+
+
+
